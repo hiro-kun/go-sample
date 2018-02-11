@@ -37,6 +37,14 @@ func main() {
         fmt.Println(msg)
     }("func test")
     // func test
+
+
+   // 配列
+   array := [...]int{1, 3, 5}
+   fmt.Println(array)
+   // [1 3 5]
+   fmt.Println(len(array))
+   // 3
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
