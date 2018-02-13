@@ -51,6 +51,42 @@ func main() {
    hoge := []int{1, 2, 3}
    fmt.Println(hoge)
    // [1 2 3]
+   hoge = append(hoge, 4, 5)
+   fmt.Println(hoge)
+   // [1 2 3 4 5]
+
+
+   // マップ
+   mapSampleA := map[string]int{"yamada":30, "tarou":35}
+   fmt.Println(mapSampleA)
+   // map[yamada:30 tarou:35]
+
+   mapStringSampleB := map[string]string{"ishikawa":"kanazawa"}
+   fmt.Println(mapStringSampleB)
+   // map[ishikawa:kanazawa]
+
+   delete(mapSampleA, "yamada")
+   fmt.Println(mapSampleA)
+   // map[tarou:35]
+
+   value, isExist := mapSampleA["tarou"]
+   fmt.Println(value)
+   // 35
+   fmt.Println(isExist)
+   // true
+
+
+   // if文
+   point := 1
+   if point % 3 == 0 && point % 5 == 0 {
+       fmt.Println("FizzBuzz")
+   } else if point % 5 == 0 {
+       fmt.Println("Fizz")
+   } else if point % 5 == 0 {
+       fmt.Println("Buzz")
+   } else {
+       fmt.Println("else")
+   }
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
