@@ -45,6 +45,12 @@ func main() {
    // [1 3 5]
    fmt.Println(len(array))
    // 3
+
+
+   // スライス
+   hoge := []int{1, 2, 3}
+   fmt.Println(hoge)
+   // [1 2 3]
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
