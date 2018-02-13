@@ -87,6 +87,26 @@ func main() {
    } else {
        fmt.Println("else")
    }
+
+
+   // switch文
+   country := "France"
+       switch country {
+       case "Japan":
+           fmt.Println("Japan")
+       case "UK", "France", "Italy":
+           fmt.Println("Europe")
+       default:
+           fmt.Println("Not applicable")
+    }
+
+    height := 150
+    switch {
+    case height > 175:
+            fmt.Println("tall")
+        default:
+            fmt.Println("common people")
+    }
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
