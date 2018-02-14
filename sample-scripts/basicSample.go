@@ -3,6 +3,12 @@ package main
 import "fmt"
 import "strconv"
 
+// 構造体
+type product struct {
+    id string
+    price int
+}
+
 func main() {
     // 変数代入
     msg := "hello world"
@@ -137,15 +143,52 @@ func main() {
     for key, value := range rangeSample {
         fmt.Println(key, value)
     }
+    /*
+        0 a
+        1 b
+        2 c
+    */
     // ブランク修飾子（_）を利用する事によりvalueのみ引き出しが可能
     for _, value := range rangeSample {
         fmt.Println(value)
     }
+    /*
+        a
+        b
+        c
+    */
     // mapでのrange
     rangeMapSample := map[string]int{"yamada":100, "satou":200, "suzuki":300}
     for key, value := range rangeMapSample {
         fmt.Println(key, value)
     }
+    /*
+        suzuki 300
+        yamada 100
+        satou 200
+    */
+
+    // 構造体利用
+    product := new(product)
+    product.id = "A0001"
+    product.price = 200
+    fmt.Println(product)
+    // &{A0001 200}
+
+    product.show()
+    // {A0001 200}
+    product.add(500)
+    product.show()
+    // {A0001 700}
+}
+
+// 値渡し
+func (p product) show() {
+    fmt.Println(p)
+}
+// 参照渡し
+func (p *product) add(value int) {
+    p.price+= value
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
