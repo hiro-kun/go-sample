@@ -130,6 +130,22 @@ func main() {
         j++
         if j == 5 { break }
     }
+
+
+    // range
+    rangeSample := []string{"a", "b", "c"}
+    for key, value := range rangeSample {
+        fmt.Println(key, value)
+    }
+    // ブランク修飾子（_）を利用する事によりvalueのみ引き出しが可能
+    for _, value := range rangeSample {
+        fmt.Println(value)
+    }
+    // mapでのrange
+    rangeMapSample := map[string]int{"yamada":100, "satou":200, "suzuki":300}
+    for key, value := range rangeMapSample {
+        fmt.Println(key, value)
+    }
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
