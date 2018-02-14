@@ -107,6 +107,29 @@ func main() {
         default:
             fmt.Println("common people")
     }
+
+
+    // for文
+    for i := 0; i < 5; i++ {
+        // ループから抜ける
+        if i == 2 { break }
+        // 処理スキップ
+        if i == 4 { continue }
+        fmt.Println(i)
+    }
+
+    i := 0
+    for i < 5 {
+        fmt.Println(i)
+        i++
+    }
+
+    j := 0
+    for {
+        fmt.Println(j)
+        j++
+        if j == 5 { break }
+    }
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
