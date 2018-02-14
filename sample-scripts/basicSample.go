@@ -9,6 +9,30 @@ type product struct {
     price int
 }
 
+// 値渡し
+func (p product) show() {
+    fmt.Println(p)
+}
+// 参照渡し
+func (p *product) add(value int) {
+    p.price+= value
+}
+
+// インターフェイス
+type animal interface {
+    eat()
+}
+
+type cat struct {}
+type dog struct {}
+
+func (c cat) eat() {
+    fmt.Println("Cat eat!")
+}
+func (d dog) eat() {
+    fmt.Println("Dog eat!")
+}
+
 func main() {
     // 変数代入
     msg := "hello world"
@@ -180,15 +204,15 @@ func main() {
     product.add(500)
     product.show()
     // {A0001 700}
-}
 
-// 値渡し
-func (p product) show() {
-    fmt.Println(p)
-}
-// 参照渡し
-func (p *product) add(value int) {
-    p.price+= value
+
+    // インターフェイス ※他の型の場合、rangeでループ出来なくなるが、インターフェイスをあてる事によりループ処理を回す事が出来る
+    animals := []animal{cat{}, dog{}}
+       for _, animal := range animals {
+       animal.eat()
+       // Cat eat!
+       // Dog eat!
+    }
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
