@@ -23,6 +23,29 @@ type animal interface {
     eat()
 }
 
+// 空インターフェイス
+func showAnimalType(t interface{}) {
+    /*
+    _, isDog := t.(dog)
+
+    if isDog {
+        fmt.Println("Dog.")
+    } else {
+        fmt.Println("Not Dog.")
+    }
+    */
+
+    // 型Switch
+    switch t.(type) {
+    case dog:
+        fmt.Println("Dog.")
+    case cat:
+        fmt.Println("Cat.")
+    default:
+        fmt.Println("Not animal.")
+    }
+}
+
 type cat struct {}
 type dog struct {}
 
@@ -210,8 +233,11 @@ func main() {
     animals := []animal{cat{}, dog{}}
        for _, animal := range animals {
        animal.eat()
+       showAnimalType(animal)
        // Cat eat!
+       // Cat.
        // Dog eat!
+       // Dog.
     }
 }
 
