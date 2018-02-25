@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "strconv"
+import (
+    "fmt"
+    "time"
+    "strconv"
+)
 
 // 構造体
 type product struct {
@@ -239,6 +242,43 @@ func main() {
        // Dog eat!
        // Dog.
     }
+
+    // goルーチン
+    Isfinished := make(chan bool)
+
+    // 配列
+    execs := []func(){
+        func() {
+            fmt.Println("exec1 started.")
+            time.Sleep(1 * time.Second)
+            fmt.Println("exec1 finished.")
+            Isfinished <- true
+        },
+        func() {
+            fmt.Println("exec2 started.")
+            time.Sleep(2 * time.Second)
+            fmt.Println("exec2 finished.")
+            Isfinished <- true
+        },
+        func() {
+            fmt.Println("exec3 started.")
+            time.Sleep(3 * time.Second)
+            fmt.Println("exec3 finished.")
+            Isfinished <- true
+        },
+    }
+
+    // 並行化
+    for _, exec := range execs {
+        go exec()
+    }
+
+    // 終了待ち
+    for i := 0; i < len(execs); i++ {
+        <-Isfinished
+    }
+
+    fmt.Println("all finished.")
 }
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
