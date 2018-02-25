@@ -6,6 +6,11 @@ import (
     "strconv"
 )
 
+func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
+    msg = "Input name is " + name
+    return
+}
+
 // 構造体
 type product struct {
     id string
@@ -279,9 +284,4 @@ func main() {
     }
 
     fmt.Println("all finished.")
-}
-
-func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
-    msg = "Input name is " + name
-    return
 }
