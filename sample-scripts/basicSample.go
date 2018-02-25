@@ -4,6 +4,7 @@ import (
     "fmt"
     "time"
     "strconv"
+    "net/http"
 )
 
 func sampleFunc(name string) (/* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
@@ -62,6 +63,10 @@ func (c cat) eat() {
 }
 func (d dog) eat() {
     fmt.Println("Dog eat!")
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hi %s!", r.URL.Path[1:])
 }
 
 func main() {
@@ -284,4 +289,9 @@ func main() {
     }
 
     fmt.Println("all finished.")
+
+
+    // WEBサーバーを立てる
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":8080", nil)
 }
