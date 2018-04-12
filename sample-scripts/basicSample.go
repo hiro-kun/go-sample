@@ -81,7 +81,7 @@ func main() {
 	// 12345
 
 	// 定数
-	const sampleConst = "sample message"
+	const SampleConst = "sample message"
 	fmt.Println(sampleConst)
 	// sample message
 
