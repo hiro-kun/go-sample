@@ -82,7 +82,7 @@ func main() {
 
 	// 定数
 	const SampleConst = "sample message"
-	fmt.Println(sampleConst)
+	fmt.Println(SampleConst)
 	// sample message
 
 	// 関数
