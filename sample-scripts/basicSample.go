@@ -288,6 +288,6 @@ func main() {
 	fmt.Println("all finished.")
 
 	// WEBサーバーを立てる
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	// http.HandleFunc("/", handler)
+	// http.ListenAndServe(":8080", nil)
 }
