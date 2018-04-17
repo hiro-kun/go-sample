@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	// "os"
+	"reflect"
 )
 
 func sampleFunc(name string) ( /* ここに帰り値を記述する事によりreturnの後にreturnする変数名を記述しなくていい */ msg string) {
@@ -71,6 +73,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+  // プログラム終了
+  // os.Exit(0)
+
 	// 変数代入
 	msg := "hello world"
 	fmt.Println(msg)
@@ -84,6 +90,9 @@ func main() {
 	const SampleConst = "sample message"
 	fmt.Println(SampleConst)
 	// sample message
+
+	// 型取得
+	fmt.Println(reflect.TypeOf(SampleConst))
 
 	// 関数
 	fmt.Println(sampleFunc("yamada-tarou"))
