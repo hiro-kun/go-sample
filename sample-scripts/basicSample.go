@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	// "os"
+	"os"
 	"reflect"
 )
 
@@ -93,6 +93,15 @@ func main() {
 
 	// 型取得
 	fmt.Println(reflect.TypeOf(SampleConst))
+  // string
+
+	// 時刻比較
+  nowTime := time.Now();
+	// 一週間前の時刻に設定
+  oneWeekAgo := nowTime.AddDate(0, 0, -7)
+  fmt.Println(nowTime.Before(oneWeekAgo))
+  // 時刻nowTimeは過去である。引数oneWeekAgoより。
+  // ※同じ時刻は含まれない
 
 	// 関数
 	fmt.Println(sampleFunc("yamada-tarou"))
