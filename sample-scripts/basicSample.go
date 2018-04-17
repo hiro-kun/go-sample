@@ -99,9 +99,10 @@ func main() {
   nowTime := time.Now();
 	// 一週間前の時刻に設定
   oneWeekAgo := nowTime.AddDate(0, 0, -7)
+	// 時刻nowTimeは過去である。引数oneWeekAgoより。
+	// ※同じ時刻は含まれない
+  // false
   fmt.Println(nowTime.Before(oneWeekAgo))
-  // 時刻nowTimeは過去である。引数oneWeekAgoより。
-  // ※同じ時刻は含まれない
 
 	// 関数
 	fmt.Println(sampleFunc("yamada-tarou"))
