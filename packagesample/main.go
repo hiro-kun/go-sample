@@ -1,9 +1,9 @@
 package main
 
 import (
-  "./package1"
+	"./package1"
 )
 
 func main() {
-  package1.UserInfo("Hiro", 30)
+	package1.UserInfo("Hiro", 30)
 }
