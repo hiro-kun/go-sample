@@ -1,6 +1,7 @@
 /.idea
 /.vagrant
-/vendor
+imageresize/vendor
+imageresize/vendor.orig
 .DS_Store
 .project
 .buildpath
