@@ -1,5 +1,6 @@
 /.idea
 /.vagrant
+/vendor
 .DS_Store
 .project
 .buildpath
