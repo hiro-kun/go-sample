@@ -29,7 +29,3 @@ var versionCmd = &cobra.Command{
         fmt.Println("Imageresize v1.0")
     },
 }
-
-func Sample(msg string)() {
-  fmt.Println(msg)
-}
