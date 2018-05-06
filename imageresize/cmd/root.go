@@ -4,13 +4,16 @@ import (
     "fmt"
 
     "github.com/spf13/cobra"
-    // "github.com/spf13/viper"
 )
 
 var RootCmd = &cobra.Command{
+    // コマンド名
     Use:   "sample",
-    Short: "This tool is pretty cool.",
+
+    // コマンドの説明
     Long:  "This tool is a great convenience.",
+
+    // スクリプト記載箇所 
     Run: func(cmd *cobra.Command, args []string) {
 
     },
