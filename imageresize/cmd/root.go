@@ -8,14 +8,11 @@ import (
 
 var RootCmd = &cobra.Command{
     // コマンド名
-    Use:   "sample",
-
+    Use:   "Image resize script.",
     // コマンドの説明
-    Long:  "This tool is a great convenience.",
-
-    // スクリプト記載箇所 
+    Long:  "This tool will change the image size.",
+    // スクリプト記載箇所
     Run: func(cmd *cobra.Command, args []string) {
-
     },
 }
 
@@ -26,10 +23,10 @@ func init() {
 
 var versionCmd = &cobra.Command{
     Use:   "version",
-    Short: "Print the version number of sample",
-    Long:  `All software has versions. This is sample`,
+    Short: "Print the version number of Imageresize",
+    Long:  `All software has versions. This is Imageresize`,
     Run: func(cmd *cobra.Command, args []string) {
-        fmt.Println("sample v1.0")
+        fmt.Println("Imageresize v1.0")
     },
 }
 
