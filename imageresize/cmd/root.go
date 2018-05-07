@@ -23,7 +23,6 @@ func init() {
 
 var versionCmd = &cobra.Command{
     Use:   "version",
-    Short: "Print the version number of Imageresize",
     Long:  `All software has versions. This is Imageresize`,
     Run: func(cmd *cobra.Command, args []string) {
         fmt.Println("Imageresize v1.0")
