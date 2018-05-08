@@ -7,8 +7,10 @@ import (
     "os"
     "io/ioutil"
 
-    "imageresize/imageresize/lib/conf"
+    "github.com/disintegration/imaging"
     "github.com/spf13/cobra"
+
+    "imageresize/imageresize/lib/conf"
 )
 
 func init() {
@@ -20,23 +22,47 @@ var reizeCmd = &cobra.Command{
     Long:  "resize cmd.",
     Run: func(cmd *cobra.Command, args []string) {
         baseDir := os.Getenv("GOPATH") + "/src" + conf.BaseImageDir
-        outDir := os.Getenv("GOPATH") + "/src" + conf.OutImageDir
+        // outDir := os.Getenv("GOPATH") + "/src" + conf.OutImageDir
 
         files, err := ioutil.ReadDir(baseDir)
         if err != nil {
           panic(err)
         }
 
+        var fileList[]string
         for _, file := range files {
-          fmt.Println(baseDir + file.Name())
+          fileName := baseDir + file.Name()
+          fileList = append(fileList, fileName)
+          fmt.Println()
         }
 
-        fmt.Println(1111)
-        fmt.Println(args)
-        fmt.Println(baseDir)
-        fmt.Println(outDir)
+        // fmt.Println(args)
+        // fmt.Println(baseDir)
+        // fmt.Println(outDir)
+        // fmt.Println(fileList)
+
+        fmt.Println(fileList[1])
+
+        fmt.Println("Hello")
+        // load an image from file
+        srcImage, err := imaging.Open(fileList[1])
+        if err != nil {
+        	panic(err)
+        }
+
+        // save the image to file
+        err = imaging.Save(srcImage, "/tmp/test.png")
+        if err != nil {
+            panic(err)
+        }
 
 
+
+        /*
+           取得したファイルパス一覧をスライスに入れる
+           一つずつ取り出してresizeしていく。そこでgoルーチンを利用
+           resize開始と終了でCUI上にデバッグ処理を出す
+        */
 
         /* プログラムの設計
              ※拡張子は指定しない。
