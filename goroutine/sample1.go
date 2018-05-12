@@ -20,6 +20,7 @@ func main() {
         "http://test.com/5",
     }
 
+    // 同時実行数
     limit := make(chan struct{}, 2)
 
     var wg sync.WaitGroup
