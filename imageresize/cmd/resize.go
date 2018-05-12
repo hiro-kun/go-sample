@@ -21,6 +21,10 @@ var reizeCmd = &cobra.Command{
     Use:   "resize",
     Long:  "resize cmd.",
     Run: func(cmd *cobra.Command, args []string) {
+
+        // CPUコア数に応じてチャンネル数の上限を決める
+        finished := make(chan bool)
+
         baseDir := os.Getenv("GOPATH") + "/src" + conf.BaseImageDir
         // outDir := os.Getenv("GOPATH") + "/src" + conf.OutImageDir
 
@@ -36,30 +40,27 @@ var reizeCmd = &cobra.Command{
           fmt.Println()
         }
 
+        go func() {
+          // load an image from file
+          srcImage, err := imaging.Open(fileList[1])
+          if err != nil {
+            panic(err)
+          }
+
+          // save the image to file
+          err = imaging.Save(srcImage, "/tmp/test.png")
+          if err != nil {
+            panic(err)
+          }
+        } ()
+
         // fmt.Println(args)
         // fmt.Println(baseDir)
         // fmt.Println(outDir)
         // fmt.Println(fileList)
-
-        fmt.Println(fileList[1])
-
-        fmt.Println("Hello")
-        // load an image from file
-        srcImage, err := imaging.Open(fileList[1])
-        if err != nil {
-        	panic(err)
-        }
-
-        // save the image to file
-        err = imaging.Save(srcImage, "/tmp/test.png")
-        if err != nil {
-            panic(err)
-        }
-
-
+        // fmt.Println(fileList[1])
 
         /*
-           取得したファイルパス一覧をスライスに入れる
            一つずつ取り出してresizeしていく。そこでgoルーチンを利用
            resize開始と終了でCUI上にデバッグ処理を出す
         */
