@@ -25,7 +25,6 @@ var reizeCmd = &cobra.Command{
     Run: func(cmd *cobra.Command, args []string) {
 
         baseDir := os.Getenv("GOPATH") + "/src" + conf.BaseImageDir
-        // outDir := os.Getenv("GOPATH") + "/src" + conf.OutImageDir
 
         files, err := ioutil.ReadDir(baseDir)
         if err != nil {
@@ -111,9 +110,20 @@ func (d *Worker) Stop() {
 	d.wg.Wait()
 }
 
-// get API call ダミー
+// 画像変換
 func resize(filePath string) {
 fmt.Println(filePath)
+
+  f, _ := os.Open(filePath)
+  defer f.Close()
+
+  fi, err := f.Stat()
+  if err != nil {
+    return
+  }
+
+  fileName := fi.Name()
+  fmt.Println(fileName)
 
   // load an image from file
   srcImage, err := imaging.Open(filePath)
@@ -121,8 +131,11 @@ fmt.Println(filePath)
     panic(err)
   }
 
+  outDir := os.Getenv("GOPATH") + conf.OutImageDir
+
   // save the image to file
-  err = imaging.Save(srcImage, "/tmp/test.png")
+  // err = imaging.Save(srcImage, "/tmp/" + fileName)
+  err = imaging.Save(srcImage, outDir + fileName)
   if err != nil {
     panic(err)
   }
