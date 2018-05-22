@@ -24,6 +24,7 @@ var reizeCmd = &cobra.Command{
 
         files, err := ioutil.ReadDir(baseDir)
         if err != nil {
+          // TODO エラー処理後で修正
           panic(err)
         }
 
@@ -31,7 +32,7 @@ var reizeCmd = &cobra.Command{
         for _, file := range files {
           fileName := baseDir + file.Name()
 
-          // 一時的に.gitkeepを外す。根本解決は今度
+          // TODO 一時的に.gitkeepを外す。根本解決は今度
           if strings.Contains(fileName, ".gitkeep") {
             continue
           }
