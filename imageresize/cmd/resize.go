@@ -21,7 +21,7 @@ var reizeCmd = &cobra.Command{
     Long:  "resize cmd.",
     Run: func(cmd *cobra.Command, args []string) {
 
-        baseDir := os.Getenv("GOPATH") + "/src" + conf.BaseImageDir
+        baseDir := os.Getenv("GOPATH") + conf.BaseImageDir
 
         files, err := ioutil.ReadDir(baseDir)
         if err != nil {
