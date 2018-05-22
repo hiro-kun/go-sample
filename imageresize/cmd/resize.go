@@ -3,15 +3,11 @@ package cmd
 // go run main.go resize hoge
 
 import (
-    "fmt"
     "os"
     "io/ioutil"
-    "sync"
     "strings"
-
-    "github.com/disintegration/imaging"
     "github.com/spf13/cobra"
-
+    "imageresize/imageresize/lib/resize"
     "imageresize/imageresize/lib/conf"
 )
 
@@ -43,7 +39,7 @@ var reizeCmd = &cobra.Command{
           fileList = append(fileList, fileName)
         }
 
-        d := NewWorker()
+        d := resize.NewWorker()
 
         for _, file := range fileList {
           d.Add(file)
@@ -60,83 +56,4 @@ var reizeCmd = &cobra.Command{
            - go run main.go resize height width
         */
     },
-}
-
-
-type (
-	// Worker 構造体定義
-	Worker struct {
-		queue chan interface{}
-		wg    sync.WaitGroup
-	}
-)
-
-const (
-	maxWorkers = 2
-	queueLimit = 1000
-)
-
-// NewWorker NewWorker生成
-func NewWorker() *Worker {
-	d := &Worker{
-		queue: make(chan interface{}, queueLimit),
-	}
-	return d
-}
-
-// Add キューに処理を追加
-func (d *Worker) Add(v interface{}) {
-	d.queue <- v
-}
-
-// Start Worker開始
-func (d *Worker) Start() {
-	d.wg.Add(maxWorkers)
-	for i := 0; i < maxWorkers; i++ {
-		go func() {
-			defer d.wg.Done()
-			for v := range d.queue {
-				if str, ok := v.(string); ok {
-					resize(str)
-				}
-			}
-		}()
-	}
-}
-
-// Stop 停止処理
-func (d *Worker) Stop() {
-	close(d.queue)
-	d.wg.Wait()
-}
-
-// 画像変換
-func resize(filePath string) {
-fmt.Println(filePath)
-
-  f, _ := os.Open(filePath)
-  defer f.Close()
-
-  fi, err := f.Stat()
-  if err != nil {
-    return
-  }
-
-  fileName := fi.Name()
-  fmt.Println(fileName)
-
-  // load an image from file
-  srcImage, err := imaging.Open(filePath)
-  if err != nil {
-    panic(err)
-  }
-
-  outDir := os.Getenv("GOPATH") + conf.OutImageDir
-
-  // save the image to file
-  // err = imaging.Save(srcImage, "/tmp/" + fileName)
-  err = imaging.Save(srcImage, outDir + fileName)
-  if err != nil {
-    panic(err)
-  }
 }
