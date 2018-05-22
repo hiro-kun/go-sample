@@ -3,6 +3,7 @@ package resize
 import(
   "sync"
   "os"
+  "fmt"
   "github.com/disintegration/imaging"
   "imageresize/imageresize/lib/conf"
 )
@@ -41,7 +42,11 @@ func (w *Worker) Start() {
 			defer w.wg.Done()
 			for v := range w.queue {
 				if str, ok := v.(string); ok {
-					resize(str)
+					err := resize(str)
+          if err != nil {
+            // エラー制御が煩雑になるためあえてpanicを起こす
+            panic(err)
+          }
 				}
 			}
 		}()
@@ -54,29 +59,30 @@ func (w *Worker) Stop() {
 	w.wg.Wait()
 }
 
-// 画像変換
-func resize(filePath string) {
+// resize 画像変換
+func resize(filePath string) error {
 
   f, _ := os.Open(filePath)
   defer f.Close()
 
   fi, err := f.Stat()
   if err != nil {
-    // TODO エラー処理修正
-    return
+    return fmt.Errorf(" %s is file open failed. %s", err)
   }
 
   fileName := fi.Name()
 
   srcImage, err := imaging.Open(filePath)
   if err != nil {
-    panic(err)
+    return fmt.Errorf(" %s is image open failed. %s", filePath, err)
   }
 
   outDir := os.Getenv("GOPATH") + conf.OutImageDir
 
   err = imaging.Save(srcImage, outDir + fileName)
   if err != nil {
-    panic(err)
+    return fmt.Errorf(" %s is image resize failed. %s", filePath, err)
   }
+
+  return nil
 }

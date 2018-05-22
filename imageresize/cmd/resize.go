@@ -4,6 +4,7 @@ package cmd
 
 import (
     "os"
+    "fmt"
     "io/ioutil"
     "strings"
     "github.com/spf13/cobra"
@@ -24,8 +25,8 @@ var reizeCmd = &cobra.Command{
 
         files, err := ioutil.ReadDir(baseDir)
         if err != nil {
-          // TODO エラー処理後で修正
-          panic(err)
+          fmt.Println("directory open error. %s", err)
+          os.Exit(1)
         }
 
         var fileList[]string
@@ -40,15 +41,14 @@ var reizeCmd = &cobra.Command{
           fileList = append(fileList, fileName)
         }
 
-        d := resize.NewWorker()
-
+        w := resize.NewWorker()
         for _, file := range fileList {
-          d.Add(file)
+          w.Add(file)
         }
 
-        d.Start()
+        w.Start()
 
-        d.Stop()
+        w.Stop()
 
         /* プログラムの設計
              ※拡張子は指定しない。
