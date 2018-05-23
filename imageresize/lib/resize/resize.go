@@ -4,6 +4,7 @@ import(
   "sync"
   "os"
   "fmt"
+  "log"
   "github.com/disintegration/imaging"
   "imageresize/imageresize/lib/conf"
 )
@@ -35,18 +36,18 @@ func (w *Worker) Add(v interface{}) {
 }
 
 // Start Worker開始
-func (w *Worker) Start() {
+func (w *Worker) Start(width int, height int) {
 	w.wg.Add(maxWorkers)
 	for i := 0; i < maxWorkers; i++ {
 		go func() {
 			defer w.wg.Done()
 			for v := range w.queue {
-				if str, ok := v.(string); ok {
-					err := resize(str)
+				if filePath, ok := v.(string); ok {
+					err := resize(width, height, filePath)
           if err != nil {
-            // エラー制御が煩雑になるためあえてpanicを起こす
-            panic(err)
+            log.Printf("error: %s ", err)
           }
+          fmt.Println(filePath + " is resized.")
 				}
 			}
 		}()
@@ -60,7 +61,7 @@ func (w *Worker) Stop() {
 }
 
 // resize 画像変換
-func resize(filePath string) error {
+func resize(w int, h int, filePath string) error {
 
   f, _ := os.Open(filePath)
   defer f.Close()
@@ -71,17 +72,21 @@ func resize(filePath string) error {
   }
 
   fileName := fi.Name()
+  outDir := os.Getenv("GOPATH") + conf.OutImageDir
 
   srcImage, err := imaging.Open(filePath)
   if err != nil {
     return fmt.Errorf(" %s is image open failed. %s", filePath, err)
   }
 
-  outDir := os.Getenv("GOPATH") + conf.OutImageDir
-
-  err = imaging.Save(srcImage, outDir + fileName)
+  resizeImage := imaging.Resize(srcImage, w, h, imaging.Lanczos)
   if err != nil {
     return fmt.Errorf(" %s is image resize failed. %s", filePath, err)
+  }
+
+  err = imaging.Save(resizeImage, outDir + fileName)
+  if err != nil {
+    return fmt.Errorf(" %s is image save failed. %s", filePath, err)
   }
 
   return nil
