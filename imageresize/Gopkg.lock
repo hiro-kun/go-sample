@@ -8,16 +8,16 @@
   version = "v1.4.1"
 
 [[projects]]
+  name = "github.com/go-ozzo/ozzo-validation"
+  packages = ["."]
+  revision = "85dcd8368eba387e65a03488b003e233994e87e9"
+  version = "v3.3"
+
+[[projects]]
   name = "github.com/inconshreveable/mousetrap"
   packages = ["."]
   revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
   version = "v1.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/nfnt/resize"
-  packages = ["."]
-  revision = "83c6a9932646f83e3267f353373d47347b6036b2"
 
 [[projects]]
   name = "github.com/spf13/cobra"
@@ -44,6 +44,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c83ee8e9776eb6ee6c18bbd7e6ef9a6e50516a713d5b6f3946bbb21f91fbd4e8"
+  inputs-digest = "e8cb8046b2501b77420235338497c832afacae769eb5156c17fac8071314e8a8"
   solver-name = "gps-cdcl"
   solver-version = 1
