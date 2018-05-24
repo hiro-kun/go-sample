@@ -7,6 +7,7 @@ import (
     "fmt"
     "io/ioutil"
     "strings"
+    "strconv"
 
     "github.com/spf13/cobra"
     "github.com/go-ozzo/ozzo-validation"
@@ -58,9 +59,8 @@ var reizeCmd = &cobra.Command{
       for _, file := range files {
         fileName := baseDir + file.Name()
 
-        // TODO 一時的に.gitkeepを外す。根本解決は今度
-        // 拡張子を特定の拡張子以外は弾くようにする
-        if strings.Contains(fileName, ".gitkeep") {
+        // .jpg,.png以外の拡張子の場合はスキップ
+        if !strings.Contains(fileName, ".jpg") && !strings.Contains(fileName, ".png") {
           continue
         }
 
