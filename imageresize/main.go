@@ -7,11 +7,6 @@ mkdir $GOPATH/src
 mkdir $GOPATH/src/imageresize
 dep ensure
 
-dep ensure -add github.com/spf13/cobra/cobra
-
-
-Gopkg.toml
-上記ファイルのコメントアウトされている処理を削除する
 */
 
 package main
