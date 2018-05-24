@@ -74,12 +74,5 @@ var reizeCmd = &cobra.Command{
       w.Start(opt.width, opt.height)
 
       w.Stop()
-
-        /* プログラムの設計
-             ※拡張子は指定しない。
-             ※画像の一括変換に対応、ファイル単体指定は無し
-
-           - go run main.go resize height width
-        */
     },
 }
