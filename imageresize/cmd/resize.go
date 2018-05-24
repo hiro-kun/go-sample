@@ -27,9 +27,8 @@ type opt struct {
 
 func (o opt) Validate() error {
 	return validation.ValidateStruct(&o,
-    // TODO エラー・メッセージを定数化
-    validation.Field(&o.height, validation.Required, validation.Min(10).Error("error. height input between 10 to 500"), validation.Max(500).Error("error. height input between 10 to 500")),
-    validation.Field(&o.height, validation.Required, validation.Min(10).Error("error. height input between 10 to 500"), validation.Max(500).Error("error. height input between 10 to 500")),
+    validation.Field(&o.height, validation.Required, validation.Min(10).Error(conf.ValidateInputErrorMessage), validation.Max(500).Error(conf.ValidateInputErrorMessage)),
+    validation.Field(&o.height, validation.Required, validation.Min(10).Error(conf.ValidateInputErrorMessage), validation.Max(500).Error(conf.ValidateInputErrorMessage)),
 	)
 }
 
