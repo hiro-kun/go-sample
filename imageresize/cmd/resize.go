@@ -1,7 +1,5 @@
 package cmd
 
-// go run main.go resize hoge
-
 import (
     "os"
     "fmt"
