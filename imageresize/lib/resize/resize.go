@@ -5,6 +5,7 @@ import(
   "os"
   "fmt"
   "log"
+
   "github.com/disintegration/imaging"
   "imageresize/imageresize/lib/conf"
 )
@@ -45,9 +46,10 @@ func (w *Worker) Start(width int, height int) {
 				if filePath, ok := v.(string); ok {
 					err := resize(width, height, filePath)
           if err != nil {
-            log.Printf("error: %s ", err)
+            log.Printf("[ERROR]: %s ", err)
+          } else {
+            fmt.Println(filePath + " is resized.")
           }
-          fmt.Println(filePath + " is resized.")
 				}
 			}
 		}()
