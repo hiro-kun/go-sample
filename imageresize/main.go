@@ -1,10 +1,11 @@
 /*
-mkdir go-sample
-cd go-sample
+
+cd
 git clone https://github.com/hiro-kun/go-sample.git
-ln -s /home/vagrant/go-sample/imageresize/ /home/vagrant/.gvm/pkgsets/go1.9.4/global/src/imageresize
-mkdir $GOPATH/src
-mkdir $GOPATH/src/imageresize
+mkdir -p $GOPATH/src/github.com/hiro-kun/
+ln -s /home/vagrant/go-sample/imageresize $GOPATH/src/github.com/hiro-kun/imageresize
+cd $GOPATH/src/github.com/hiro-kun/imageresize
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 dep ensure
 
 */
@@ -15,9 +16,7 @@ import (
   "fmt"
   "os"
 
-  // ここには$GOPATH(/home/vagrant/.gvm/pkgsets/go1.9.4/global)+src配下のフルパスを記載
-  // ※後ほどパスを修正
-  "imageresize/imageresize/cmd"
+  "github.com/hiro-kun/imageresize/cmd"
 )
 
 func main() {

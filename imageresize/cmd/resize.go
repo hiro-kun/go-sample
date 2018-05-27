@@ -10,8 +10,8 @@ import (
     "github.com/spf13/cobra"
     "github.com/go-ozzo/ozzo-validation"
 
-    "imageresize/imageresize/lib/resize"
-    "imageresize/imageresize/lib/conf"
+    "github.com/hiro-kun/imageresize/lib/resize"
+    "github.com/hiro-kun/imageresize/lib/conf"
 )
 
 func init() {

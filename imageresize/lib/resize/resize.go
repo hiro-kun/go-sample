@@ -7,7 +7,8 @@ import(
   "log"
 
   "github.com/disintegration/imaging"
-  "imageresize/imageresize/lib/conf"
+
+  "github.com/hiro-kun/imageresize/lib/conf"
 )
 
 type (
